@@ -1654,6 +1654,21 @@ export default class Player extends PathingEntity {
         }
     }
 
+    scaleExponential(input: number, min: number = 1, max: number = 99, outputMin: number = 3, outputMax: number = 30): number {
+        // Ensure input is within the valid range
+        if (input <= min) return outputMin;
+        if (input >= max) return outputMax;
+        // Normalize the input to a 0-1 range based on min and max
+        const normalizedInput = (input - min) / (max - min);
+    
+        // Apply an exponential scale (use an exponent to adjust the curve steepness)
+        const exponent = 5;  // You can tweak this value for more/less steep scaling
+        const exponentialValue = Math.pow(normalizedInput, exponent);
+    
+        // Map the result to the desired output range between outputMin and outputMax
+        return outputMin + exponentialValue * (outputMax - outputMin);
+    }
+
     addXp(stat: number, xp: number, allowMulti: boolean = true) {
         // require xp is >= 0. there is no reason for a requested addXp to be negative.
         if (xp < 0) {
@@ -1665,7 +1680,8 @@ export default class Player extends PathingEntity {
             return;
         }
 
-        const multi = allowMulti ? Environment.NODE_XPRATE : 1;
+        const multi = this.scaleExponential(this.levels[stat]);
+        console.log(multi.toString());
         this.stats[stat] += xp * multi;
 
         // cap to 200m, this is represented as "2 billion" because we use 32-bit signed integers and divide by 10 to give us a decimal point
