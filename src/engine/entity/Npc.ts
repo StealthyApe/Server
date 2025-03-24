@@ -895,8 +895,7 @@ export default class Npc extends PathingEntity {
     private huntPlayers(hunt: HuntType): Entity[] {
         const type: NpcType = NpcType.get(this.type);
         const players: Entity[] = [];
-        const hunted: HuntIterator = new HuntIterator(World.currentTick, this.level, this.x, this.z, this.huntrange, hunt.checkVis, -1, -1, HuntModeType.PLAYER);
-
+        const hunted: HuntIterator = new HuntIterator(World.currentTick, this.level, this.x, this.z, this.huntrange, hunt.checkVis, -1, -1, HuntModeType.PLAYER); 
         for (const player of hunted) {
             if (!(player instanceof Player)) {
                 throw new Error('[Npc] huntAll must be of type Player here.');
