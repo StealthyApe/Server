@@ -2,8 +2,8 @@
 name=Bank booth
 desc=The bank teller will serve you from here.
 model=model_loc_2213
-op1=Use
-op2=Use-quickly
+op1=Use-quickly
+op2=Use
 blockrange=no
 
 [loc_2214]

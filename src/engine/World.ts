@@ -114,8 +114,8 @@ class World {
 
     private static readonly TICKRATE: number = 600; // 0.6s / 600ms
 
-    private static readonly INV_STOCKRATE: number = 100; // 1m
-    private static readonly AFK_EVENTRATE: number = 500; // 5m
+    private static readonly INV_STOCKRATE: number = 1; // 1m
+    private static readonly AFK_EVENTRATE: number = 9000; // 5m
     private static readonly PLAYER_SAVERATE: number = 500; // 5m
     private static readonly PLAYER_COORDLOGRATE: number = 50; // 30s
 
@@ -1220,13 +1220,13 @@ class World {
                     continue;
                 }
                 // Item stock is under min
-                if (item.count < invType.stockcount[index] && tick % invType.stockrate[index] === 0) {
-                    inv.add(item?.id, 1, index, true, false, false);
+                if (item.count < invType.stockcount[index] && tick % World.INV_STOCKRATE === 0) {
+                    inv.add(item?.id, 60, index, true, false, false);
                     inv.update = true;
                     continue;
                 }
                 // Item stock is over min
-                if (item.count > invType.stockcount[index] && tick % invType.stockrate[index] === 0) {
+                if (item.count > invType.stockcount[index] && tick % World.INV_STOCKRATE === 0) {
                     inv.remove(item?.id, 1, index, true);
                     inv.update = true;
                     continue;

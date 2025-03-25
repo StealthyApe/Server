@@ -35,11 +35,11 @@ if (~check_fish_equipment(fly_fishing_rod) = false) {
 }
 // matches this video 1:1 https://youtu.be/neAoU0yiGFY?t=16
 if (%action_delay < map_clock) {
-    %action_delay = calc(map_clock + 4);
+    %action_delay = calc(map_clock + 2);
     p_opnpc(1);
     return;
 }
-if (%action_delay = calc(map_clock + 3)) {
+if (%action_delay = calc(map_clock + 1)) {
     anim(human_fishing_casting, 0);
     mes("You cast out your line...");
     p_opnpc(1);
@@ -75,7 +75,7 @@ if (inv_freespace(inv) = 0 & inv_total(inv, feather) > 1) {
     return;
 }
 if (%action_delay < map_clock) {
-    %action_delay = calc(map_clock + 4);
+    %action_delay = calc(map_clock + 2);
 } else if (%action_delay = map_clock) {
     if (stat(fishing) >= 30) {
         ~fish_roll(raw_trout, raw_salmon, fly_fishing_rod, feather);
@@ -100,11 +100,11 @@ if (~check_fish_equipment(fishing_rod) = false) {
     return;
 }
 if (%action_delay < map_clock) {
-    %action_delay = calc(map_clock + 4);
+    %action_delay = calc(map_clock + 2);
     p_opnpc(3);
     return;
 }
-if (%action_delay = calc(map_clock + 3)) {
+if (%action_delay = calc(map_clock + 1)) {
     anim(human_fishing_casting, 0);
     mes("You cast out your line...");
     p_opnpc(3);
@@ -138,7 +138,7 @@ if (inv_freespace(inv) = 0 & inv_total(inv, fishing_bait) > 1) {
     return;
 }
 if (%action_delay < map_clock) {
-    %action_delay = calc(map_clock + 4);
+    %action_delay = calc(map_clock + 2);
 } else if (%action_delay = map_clock) {
     ~fish_roll(raw_pike, null, fishing_rod, fishing_bait);
     if (random(5) = 0) { // 1/5 chance to recast https://x.com/JagexAsh/status/1585958606364868608
