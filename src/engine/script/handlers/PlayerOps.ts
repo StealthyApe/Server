@@ -54,6 +54,7 @@ import PCountDialog from '#/network/server/model/PCountDialog.js';
 import SynthSound from '#/network/server/model/SynthSound.js';
 import TutFlash from '#/network/server/model/TutFlash.js';
 import ColorConversion from '#/util/ColorConversion.js';
+import Environment from '#/util/Environment.js';
 
 const PlayerOps: CommandHandlers = {
     [ScriptOpcode.FINDUID]: state => {
@@ -480,18 +481,18 @@ const PlayerOps: CommandHandlers = {
             player.changeStat(stat);
         }
     }),
-    
+
     [ScriptOpcode.STAT_BOOST]: checkedHandler(ActivePlayer, state => {
         const [stat, constant, percent] = state.popInts(3);
-    
+
         check(stat, PlayerStatValid);
         check(constant, NumberNotNull);
         check(percent, NumberNotNull);
-    
+
         const player = state.activePlayer;
         const base = player.baseLevels[stat];
         const current = player.levels[stat];
-    
+
         const boost = ((constant + (base * percent) / 100) | 0);
         const boosted = Math.min(current + boost, base + boost);
         player.levels[stat] = Math.min(boosted, 255);
@@ -853,10 +854,7 @@ const PlayerOps: CommandHandlers = {
     }),
 
     [ScriptOpcode.LAST_LOGIN_INFO]: state => {
-        // proxying websockets through cf may show IPv6 and breaks anyways
-        // so we just hardcode 127.0.0.1 (2130706433)
-
-        state.activePlayer.lastLoginInfo(2130706433, 0, 201);
+        state.activePlayer.lastLoginInfo();
     },
 
     [ScriptOpcode.BAS_READYANIM]: state => {
@@ -985,7 +983,7 @@ const PlayerOps: CommandHandlers = {
     },
 
     [ScriptOpcode.AFK_EVENT]: state => {
-        state.pushInt(state.activePlayer.afkEventReady ? 1 : 0);
+        state.pushInt((Environment.NODE_DEBUG || state.activePlayer.staffModLevel < 2) && state.activePlayer.afkEventReady ? 1 : 0);
         state.activePlayer.afkEventReady = false;
     },
 
