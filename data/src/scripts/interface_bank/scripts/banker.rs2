@@ -10,6 +10,8 @@ if (npc_range(coord) > 2) {
 
 [label,talk_to_banker]
 // todo: Confirm this for 2004.
+@openbank;
+return;
 ~chatnpcrange("<p,quiz>Good day, how may I help you?");
 
 def_int $option = ~p_choice2("I'd like to access my bank account, please.", 1, "What is this place?", 2);

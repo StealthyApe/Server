@@ -35,11 +35,11 @@ if (inv_freespace(inv) < 1) {
     return;
 }
 if (%action_delay < map_clock) {
-    %action_delay = calc(map_clock + 4);
+    %action_delay = calc(map_clock + 2);
     p_opnpc(1);
     return;
 } 
-if (%action_delay = calc(map_clock + 3)) {
+if (%action_delay = calc(map_clock + 2)) {
     mes("You cast out your net...");
     anim(human_smallnet, 0);
     sound_synth(fishing_cast, 0, 0);
@@ -69,7 +69,7 @@ if (inv_freespace(inv) < 1) {
     return;
 }
 if (%action_delay < map_clock) {
-    %action_delay = calc(map_clock + 5);
+    %action_delay = calc(map_clock + 2);
 } else if (%action_delay = map_clock) {
     if (stat(fishing) >= 15) {
         ~fish_roll(raw_shrimps, raw_anchovies, net, null);
@@ -99,11 +99,11 @@ if (inv_freespace(inv) < 1 & inv_total(inv, fishing_bait) > 1) {
     return;
 }
 if (%action_delay < map_clock) {
-    %action_delay = calc(map_clock + 5);
+    %action_delay = calc(map_clock + 2);
     p_opnpc(3);
     return;
 } 
-if (%action_delay = calc(map_clock + 4)) {
+if (%action_delay = calc(map_clock + 2)) {
     mes("You cast out your line...");
     anim(human_fishing_casting, 0);
     p_opnpc(3);
@@ -142,7 +142,7 @@ if (inv_freespace(inv) < 1 & inv_total(inv, fishing_bait) > 1) {
     return;
 }
 if (%action_delay < map_clock) {
-    %action_delay = calc(map_clock + 4);
+    %action_delay = calc(map_clock + 2);
     anim(human_fish_onspot, 0);
 } else if (%action_delay = map_clock) {
     if (stat(fishing) >= 10) {

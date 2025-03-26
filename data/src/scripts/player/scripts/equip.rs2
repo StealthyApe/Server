@@ -330,6 +330,7 @@ if ($bonus < 0) {
 
 [proc,equip_validate_and_move](obj $obj, int $count, int $slot, int $slot1, int $slot2, int $slot3, boolean $move_item, boolean $colliders, boolean $swapped)(boolean)
 if ($slot1 ! null) {
+
     def_boolean $primary;
     $primary, $swapped = ~equip_validate_and_move_primary($obj, $count, $slot, $slot1, $move_item, $swapped);
     if ($primary = false) {
@@ -343,6 +344,7 @@ if ($slot2 ! null) {
         return(false);
     }
 }
+
 if ($slot3 ! null) {
     def_boolean $secondary2;
     $secondary2, $swapped = ~equip_validate_and_move_secondary($count, $slot, $slot2, $slot3, $move_item, $swapped, 1);
@@ -350,6 +352,7 @@ if ($slot3 ! null) {
         return(false);
     }
 }
+
 
 def_boolean $success = true;
 if ($colliders = true) {
@@ -439,7 +442,6 @@ return(true, $swapped);
 [proc,equip_validate_and_move_secondary](int $count, int $slot, int $previous_secondary_slot, int $secondary_slot, boolean $move_item, boolean $swapped, int $index)(boolean, boolean)
 def_obj $secondary_obj = inv_getobj(worn, $secondary_slot);
 def_int $secondary_count = inv_getnum(worn, $secondary_slot);
-
 if ($secondary_count > 0 & oc_stackable($secondary_obj) = false) {
     def_int $required_space = add(1, $index);
     if ($swapped = false) {
